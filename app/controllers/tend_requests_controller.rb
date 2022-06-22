@@ -1,0 +1,2 @@
+class TendRequestsController < ApplicationController
+end
