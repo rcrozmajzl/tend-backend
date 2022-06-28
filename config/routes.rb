@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  resources :tend_requests
-  resources :friendship_care_cards
-  resources :care_cards
-  resources :friendships
-  resources :friend_requests
-  resources :user_needs
-  resources :needs
     namespace :api do
         namespace :v1 do
             resources :users, only: [:index, :show, :create, :update, :destroy], param: :username
-
+            resources :needs, only: [:index, :show]
+            resources :user_needs
+            resources :tend_requests, param: :username
+            resources :friendship_care_cards, param: :username
+            resources :friendships
+            resources :care_cards, param: :username
+            resources :friend_requests, param: :username
+            
+            
             post 'register', to: 'users#create'
 
             post 'auth/login', to: 'auth#login'

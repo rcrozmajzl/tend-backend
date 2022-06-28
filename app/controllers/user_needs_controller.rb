@@ -1,2 +1,0 @@
-class UserNeedsController < ApplicationController
-end

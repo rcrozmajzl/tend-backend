@@ -8,5 +8,5 @@ class Friendship < ApplicationRecord
     has_many :tend_requests, through: :friend_a, class_name: :User
     has_many :tend_requests, through: :friend_b, class_name: :User
 
-    validates :friend_a, :friend_b, presence: true, uniqueness: true
+    validate :friend_a, :friend_b, presence: true, uniqueness: true
 end

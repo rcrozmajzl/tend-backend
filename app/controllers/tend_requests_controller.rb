@@ -1,2 +1,0 @@
-class TendRequestsController < ApplicationController
-end

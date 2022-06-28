@@ -1,6 +1,8 @@
 class TendRequestSerializer < ActiveModel::Serializer
-  attributes :id, :complete
-  has_one :friendship
-  has_one :sender
-  has_one :recipient
+  attributes :id
+
+  belongs_to :friendship
+  belongs_to :sender, class_name: :User
+  belongs_to :recipient, class_name: :User
+  belongs_to :user_need
 end
