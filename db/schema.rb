@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_23_084556) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_01_045500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,9 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_084556) do
   end
 
   create_table "user_needs", force: :cascade do |t|
-    t.string "category"
-    t.string "title"
-    t.string "details_general"
     t.string "details_personal"
     t.integer "rating_importance"
     t.integer "rating_frequency"

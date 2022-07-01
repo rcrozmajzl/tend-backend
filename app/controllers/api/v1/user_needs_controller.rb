@@ -3,12 +3,8 @@ class Api::V1::UserNeedsController < ApplicationController
 
     # GET /user_needs
     def index
-        current_user_needs = UserNeed.where(user_id: params[@user_id])
-        if current_user_needs
-            render json: current_user_needs
-        else
-            render json: { message: 'No user-needs created yet for this account!' }, status: :ok
-        end
+        current_user_needs = UserNeed.where(user_id: @user.id)
+        render json: current_user_needs, status: :ok
     end
 
     # SHOW /user_needs/
@@ -22,9 +18,9 @@ class Api::V1::UserNeedsController < ApplicationController
 
     # POST /user_needs
     def create
-        user_need = UserNeed.create(user_need_params)
+        user_need = UserNeed.create!(user_need_params)
         if user_need.valid?
-            render json: { user_need: UserNeedSerializer.new(user_need), status: :created
+            render json: { user_need: UserNeedSerializer.new(user_need)}, status: :created
         else
             render json: { message: user_need.errors.full_messages }, status: :unprocessable_entity
         end
@@ -48,7 +44,7 @@ class Api::V1::UserNeedsController < ApplicationController
     private
 
     def user_need_params
-        params.permit(:category, :title, :details_general, :details_personal, :rating_importance, :rating_frequency, :user_id)
+        params.permit(:details_personal, :rating_importance, :rating_frequency, :user_id, :need_id)
     end
 
 end

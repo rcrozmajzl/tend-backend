@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
             get 'user_is_authed', to: 'auth#user_is_authed'
 
-            get 'users/other_users', to: 'users#other_users'
+            # get 'users/other_users', to: 'users#other_users'
 
             get 'users/{username}', to: 'users#show'
         end

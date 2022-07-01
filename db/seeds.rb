@@ -4,19 +4,22 @@ puts "🌱 Seeding spices..."
 
 #create USERS
 puts 'Seeding users..'
-first = User.create(username: Faker::Internet.username, email: Faker::Internet.email, birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), location: Faker::Address.city, avatar: "https://loremflickr.com/#{rand(150..200)}/#{rand(150..200)}/all", password:"111")
-second = User.create(username: Faker::Internet.username, email: Faker::Internet.email, birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), location: Faker::Address.city, avatar: "https://loremflickr.com/#{rand(150..200)}/#{rand(150..200)}/all", password:"111")
-third = User.create(username: Faker::Internet.username, email: Faker::Internet.email, birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), location: Faker::Address.city, avatar: "https://loremflickr.com/#{rand(150..200)}/#{rand(150..200)}/all", password:"111")
-fourth = User.create(username: Faker::Internet.username, email: Faker::Internet.email, birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), location: Faker::Address.city, avatar: "https://loremflickr.com/#{rand(150..200)}/#{rand(150..200)}/all", password:"111")
-fifth = User.create(username: Faker::Internet.username, email: Faker::Internet.email, birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), location: Faker::Address.city, avatar: "https://loremflickr.com/#{rand(150..200)}/#{rand(150..200)}/all", password:"111")
-User.create(username: "test_user", email: Faker::Internet.email, birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), location: Faker::Address.city, avatar: "https://loremflickr.com/#{rand(150..200)}/#{rand(150..200)}/all", password:"111")
+
+50.times do |index|
+    User.create!(username:Faker::Internet.username,
+        email: Faker::Internet.email,
+        birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
+        location: Faker::Address.city,
+        avatar: Faker::Number.between(from: 1, to: 10),
+        password:"111"
+    )
+end
+
+User.create(username: "test_user", email: Faker::Internet.email, birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), location: Faker::Address.city, avatar: Faker::Number.between(from: 1, to: 10), password:"111")
 
 
-#create FRIEND REQUESTS
-puts 'Seeding friend requests..'
+user = User.ids
 
-#create FRIENDSHIPS
-puts 'Seeding friendships..'
 
 #create NEEDS
 puts 'Seeding needs..'
@@ -143,9 +146,25 @@ Need.create(category: "Support Needs & Strengths", title: "Transportation - need
 Need.create(category: "Support Needs & Strengths", title: "Transportation - strength", details_general: "I have unique support strenths related to Transportation")
 Need.create(category: "Support Needs & Strengths", title: "Spoonie", details_general: "Warning! Limited energy reserves! If you know, you know...")
 
+need = Need.ids
+
 
 #create USER NEEDS
 puts 'Seeding user needs..'
+300.times do |index|
+    UserNeed.create!(details_personal:Faker::TvShows::BrooklynNineNine.quote,
+        rating_importance: Faker::Number.between(from: 1, to: 3),
+        rating_frequency: Faker::Number.between(from: 1, to: 3),
+        user_id: user.sample,
+        need_id: need.sample,
+    )
+end
+
+#create FRIEND REQUESTS
+puts 'Seeding friend requests..'
+
+#create FRIENDSHIPS
+puts 'Seeding friendships..'
 
 #create USER CARE CARDS
 puts 'Seeding user care cards..'
