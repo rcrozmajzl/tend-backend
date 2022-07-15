@@ -4,7 +4,7 @@ class User < ApplicationRecord
     has_many :friend_requests_as_sender, foreign_key: :sender_id, class_name: :FriendRequest
     has_many :friend_requests_as_recipient, foreign_key: :recipient_id, class_name: :FriendRequest
 
-    has_many :user_needs
+    has_many :user_needs, inverse_of: :user, dependent: :destroy
     has_many :needs, through: :user_needs
     has_many :care_cards
 

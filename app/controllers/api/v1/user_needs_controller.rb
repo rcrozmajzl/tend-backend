@@ -19,7 +19,7 @@ class Api::V1::UserNeedsController < ApplicationController
     # POST /user_needs
     def create
         user_need = UserNeed.create!(user_need_params)
-        if user_need.valid?
+        if !!user_need
             render json: { user_need: UserNeedSerializer.new(user_need)}, status: :created
         else
             render json: { message: user_need.errors.full_messages }, status: :unprocessable_entity
