@@ -4,17 +4,16 @@ class Api::V1::UsersController < ApplicationController
     
     # GET /users
     def index
-        render json: { otherUsers: User.all }
+        render json: User.all
     end
 
     # GET /users/other_users
-    def other_users
-        if current_user
-            render json: { otherUsers: User.all_except(current_user.user)}
-        else
-            render json: { message: 'Invalid Credentials' }, status: :unauthorized
-        end
-    end
+    # def other_users
+    #     if @user
+    #         users = User.where.not(id: @user.id)
+    #         render json: users
+    #     end
+    # end
 
     # GET /users/{username}
     def show
@@ -28,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
             @token = encode_token({ user_id: @user.id })
             render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
         else
-            render json: { message: user.errors.full_messages }, status: :unprocessable_entity
+            render json: { message: @user.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
